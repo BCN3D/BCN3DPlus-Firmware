@@ -332,21 +332,22 @@ void setup_powerhold()
     WRITE(PS_ON_PIN, PS_ON_AWAKE);
   #endif
   lcd_init();
-  tone(BEEPER, 659.46); //RepRapBCN welcome tone
-          delay(300);
-          noTone(BEEPER);
-          delay(125);
-          tone(BEEPER, 523.25);
-          delay(100);
-          noTone(BEEPER);
-          delay(50);
-          tone(BEEPER, 659.46);
-          delay(225);
-          noTone(BEEPER);
-          delay(50);
-          tone(BEEPER, 784);
-          delay(475);
-          noTone(BEEPER);
+  //Rapduch Changes
+  //tone(BEEPER, 659.46); //RepRapBCN welcome tone
+          //delay(300);
+          //noTone(BEEPER);
+          //delay(125);
+          //tone(BEEPER, 523.25);
+          //delay(100);
+          //noTone(BEEPER);
+          //delay(50);
+          //tone(BEEPER, 659.46);
+          //delay(225);
+          //noTone(BEEPER);
+          //delay(50);
+          //tone(BEEPER, 784);
+          //delay(475);
+          //noTone(BEEPER);
 }
 
 void suicide()
@@ -1631,17 +1632,18 @@ void process_commands()
       int beepP = code_seen('P') ? code_value() : 1000;
       if (beepS > 0)
       {
-        #if BEEPER > 0
-          tone(BEEPER, beepS);
-          delay(beepP);
-          noTone(BEEPER);
-        #elif defined(ULTRALCD)
-          lcd_buzz(beepS, beepP);
-        #endif
-      }
-      else
-      {
-        delay(beepP);
+		  //Changes Rapduch
+        //#if BEEPER > 0
+          //tone(BEEPER, beepS);
+          //delay(beepP);
+          //noTone(BEEPER);
+        //#elif defined(ULTRALCD)
+          //lcd_buzz(beepS, beepP);
+        //#endif
+      //}
+      //else
+      //{
+        //delay(beepP);
       }
     }
     break;
@@ -1861,16 +1863,17 @@ void process_commands()
           lcd_update();
           if(cnt==0)
           {
-          #if BEEPER > 0
-            SET_OUTPUT(BEEPER);
-
-            WRITE(BEEPER,HIGH);
-            delay(3);
-            WRITE(BEEPER,LOW);
-            delay(3);
-          #else 
-            lcd_buzz(1000/6,100);
-          #endif
+			  //Rapduch Changes
+          //#if BEEPER > 0
+            //SET_OUTPUT(BEEPER);
+//
+            //WRITE(BEEPER,HIGH);
+            //delay(3);
+            //WRITE(BEEPER,LOW);
+            //delay(3);
+          //#else 
+            //lcd_buzz(1000/6,100);
+          //#endif
           }
         }
 
