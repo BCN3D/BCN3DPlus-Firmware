@@ -149,18 +149,19 @@ void Hysteresis::InsertCorrection(const float &x, const float &y, const float &z
 	//Move bits controls if the position is the same last buffer line was.
 	unsigned char move_bits = calc_move_bits(position, destination);
 	
-	SERIAL_PROTOCOL("Destination X: ");
-	SERIAL_PROTOCOL(destination[0]); //X_AXIS=0
-	SERIAL_PROTOCOL("    Current position X: ");
-	SERIAL_PROTOCOLLN(position[X_AXIS]);
-	SERIAL_PROTOCOLLN("");
-	
-	SERIAL_PROTOCOL("Destination Y: ");
-	SERIAL_PROTOCOL(destination[1]); //Y_AXIS=1
-	SERIAL_PROTOCOL("    Current positionY: ");
-	SERIAL_PROTOCOLLN(position[Y_AXIS]);
-	SERIAL_PROTOCOLLN("");
-	SERIAL_PROTOCOLLN("");
+	//Debugg
+	//SERIAL_PROTOCOL("Destination X: ");
+	//SERIAL_PROTOCOL(destination[0]); //X_AXIS=0
+	//SERIAL_PROTOCOL("    Current position X: ");
+	//SERIAL_PROTOCOLLN(position[X_AXIS]);
+	//SERIAL_PROTOCOLLN("");
+	//
+	//SERIAL_PROTOCOL("Destination Y: ");
+	//SERIAL_PROTOCOL(destination[1]); //Y_AXIS=1
+	//SERIAL_PROTOCOL("    Current positionY: ");
+	//SERIAL_PROTOCOLLN(position[Y_AXIS]);
+	//SERIAL_PROTOCOLLN("");
+	//SERIAL_PROTOCOLLN("");
 		
 	// If the direction has changed in any of the axis that need hysteresis corrections...
 	unsigned char direction_change_bits = (direction_bits ^ m_prev_direction_bits) & move_bits;
@@ -173,20 +174,22 @@ void Hysteresis::InsertCorrection(const float &x, const float &y, const float &z
 			if( direction_change_bits & (1<<axis) )
 			{
 				long fix = (((direction_bits&(1<<axis))!=0)?(-m_hysteresis_steps[axis]):(m_hysteresis_steps[axis]));
-				SERIAL_PROTOCOL("Axis :  ");
-				SERIAL_PROTOCOLLN(axis);
 				
-				SERIAL_PROTOCOL("Fix :  ");
-				SERIAL_PROTOCOLLN((long int)fix);				
-				
-				if (fix<0)
-				{					
-					SERIAL_PROTOCOLLN("------------Correction Up------------");					
-				}
-				else if (fix>0)
-				{				
-					SERIAL_PROTOCOLLN("------------Correction Down----------");					
-				}
+				//Debugg
+				//SERIAL_PROTOCOL("Axis :  ");
+				//SERIAL_PROTOCOLLN(axis);
+				//
+				//SERIAL_PROTOCOL("Fix :  ");
+				//SERIAL_PROTOCOLLN((long int)fix);				
+				//
+				//if (fix<0)
+				//{					
+					//SERIAL_PROTOCOLLN("------------Correction Up------------");					
+				//}
+				//else if (fix>0)
+				//{				
+					//SERIAL_PROTOCOLLN("------------Correction Down----------");					
+				//}
 				//Add the hysteresis: move the current position in the opposite direction so that the next travel move is longer
 				position[axis] -= fix;				
 				axis_shift[axis] += fix;
@@ -194,9 +197,9 @@ void Hysteresis::InsertCorrection(const float &x, const float &y, const float &z
 		}
 	}
 	
-	SERIAL_PROTOCOLLN("");
-	SERIAL_PROTOCOLLN("");
-	SERIAL_PROTOCOLLN("");
+	//SERIAL_PROTOCOLLN("");
+	//SERIAL_PROTOCOLLN("");
+	//SERIAL_PROTOCOLLN("");
 	//Save direction for next comparison
 	m_prev_direction_bits = (direction_bits & move_bits) | (m_prev_direction_bits & ~move_bits);
 }
