@@ -144,4 +144,10 @@ void set_extrude_min_temp(float temp);
 #endif
 
 void reset_acceleration_rates();
+
+//To use with Hysteresis correction
+void copy_position( float* ret_position );
+void set_position( const float* new_position );
+
+
 #endif

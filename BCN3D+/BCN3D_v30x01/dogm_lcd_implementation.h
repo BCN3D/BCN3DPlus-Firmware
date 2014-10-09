@@ -738,10 +738,11 @@ static void lcd_implementation_quick_feedback()
     SET_OUTPUT(BEEPER);
     for(int8_t i=0;i<10;i++)
     {
-		WRITE(BEEPER,HIGH);
-		delay(3);
-		WRITE(BEEPER,LOW);
-		delay(3);
+		tone(BEEPER, 1200, 50);		
+		//WRITE(BEEPER,HIGH);
+		//delay(3);
+		//WRITE(BEEPER,LOW);
+		//delay(3);
     }
 #endif
 }

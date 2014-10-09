@@ -12,6 +12,9 @@
   void lcd_setalertstatuspgm(const char* message);
   void lcd_reset_alert_level();
   
+  //Changes Rapduch
+  #define PAUSE_Z_CORRECTION_MM=10;
+  
   static unsigned char blink = 0;	// Variable for visualisation of fan rotation in GLCD
 
   #define LCD_MESSAGEPGM(x) lcd_setstatuspgm(PSTR(x))
@@ -25,7 +28,7 @@
   #else
   FORCE_INLINE void lcd_buttons_update() {}
   #endif
-
+   
   extern int plaPreheatHotendTemp;
   extern int plaPreheatHPBTemp;
   extern int plaPreheatFanSpeed;
@@ -78,5 +81,13 @@ char *ftostr32(const float &x);
 char *ftostr5(const float &x);
 char *ftostr51(const float &x);
 char *ftostr52(const float &x);
+
+
+//Rapduch
+extern void update_hysteresis_circles ();
+extern void update_hysteresis_off();
+//
+//static void lcd_hysteresis_menu();
+
 
 #endif //ULTRALCD

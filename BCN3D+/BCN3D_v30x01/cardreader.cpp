@@ -205,8 +205,7 @@ void CardReader::startFileprint()
 {
   if(cardOK)
   {
-    sdprinting = true;
-    
+    sdprinting = true; 
   }
 }
 
@@ -214,6 +213,7 @@ void CardReader::pauseSDPrint()
 {
   if(sdprinting)
   {
+	  
     sdprinting = false;
   }
 }

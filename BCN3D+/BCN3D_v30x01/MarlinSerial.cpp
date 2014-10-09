@@ -23,6 +23,9 @@
 #include "Marlin.h"
 #include "MarlinSerial.h"
 
+//Rapduch
+//#define AT90USB
+
 #ifndef AT90USB
 // this next line disables the entire HardwareSerial.cpp, 
 // this is so I can support Attiny series and any other chip without a uart

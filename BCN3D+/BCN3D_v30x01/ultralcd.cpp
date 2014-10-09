@@ -9,6 +9,10 @@
 #include "stepper.h"
 #include "ConfigurationStore.h"
 
+//Changes Rapduch
+#include "Hysteresis.h"
+#include "planner.h"
+
 /* Configuration settings */
 int plaPreheatHotendTemp;
 int plaPreheatHPBTemp;
@@ -67,6 +71,7 @@ static void lcd_control_temperature_preheat_abs_settings_menu();
 static void lcd_control_motion_menu();
 static void lcd_control_retract_menu();
 static void lcd_sdcard_menu();
+static void lcd_hysteresis_menu();
 //static void lcd_change_menu();
 //static void lcd_load();
 //static void lcd_unload();
@@ -233,10 +238,26 @@ static void lcd_return_to_status()
 
 static void lcd_sdcard_pause()
 {
-    card.pauseSDPrint();
+	//Changes Rapduch
+	//PAUSE CORRECTION
+	//float position_before_correction[NUM_AXIS];
+	//copy_position( position_before_correction );
+	//Set to move 10 mm the Z axis to avoid burning the figure printed 
+	//float Z_correction_pause = current_position[Z_AXIS]+20;
+	//plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], Z_correction_pause, current_position[E_AXIS], max_feedrate[Z_AXIS], active_extruder);
+    //set_position( position_before_correction );
+	card.pauseSDPrint();
 }
 static void lcd_sdcard_resume()
 {
+	//PAUSE CORRECTION
+	//float position_before_correction[NUM_AXIS];
+	//copy_position( position_before_correction );
+	//Set to move 10 mm the Z axis to avoid burning the figure printed
+	//float Z_correction_resume = current_position[Z_AXIS]-20;
+	//plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], Z_correction_resume, current_position[E_AXIS], max_feedrate[Z_AXIS], active_extruder);
+	//set_position( position_before_correction );
+
     card.startFileprint();
 }
 
@@ -528,7 +549,7 @@ static void lcd_move_z()
             current_position[Z_AXIS] = Z_MAX_POS;
         encoderPosition = 0;
         plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS], 60, active_extruder);
-        lcdDrawUpdate = 1;
+        lcdDrawUpdate = 1;		
     }
     if (lcdDrawUpdate)
     {
@@ -695,6 +716,9 @@ static void lcd_control_motion_menu()
     START_MENU();
     MENU_ITEM(back, MSG_CONTROL, lcd_control_menu);
     MENU_ITEM_EDIT(float5, MSG_ACC, &acceleration, 500, 99000);
+#ifdef HYSTERESIS_H
+	MENU_ITEM(submenu, MSG_HYSTERESIS,lcd_hysteresis_menu);
+#endif
     MENU_ITEM_EDIT(float3, MSG_VXY_JERK, &max_xy_jerk, 1, 990);
     MENU_ITEM_EDIT(float52, MSG_VZ_JERK, &max_z_jerk, 0.1, 990);
     MENU_ITEM_EDIT(float3, MSG_VE_JERK, &max_e_jerk, 1, 990);
@@ -718,6 +742,23 @@ static void lcd_control_motion_menu()
 #endif
     END_MENU();
 }
+
+#ifdef HYSTERESIS_H
+//Rapduch------------- Hysteresis
+static void lcd_hysteresis_menu()
+{
+	
+	START_MENU();
+	MENU_ITEM(back, MSG_MOTION, lcd_control_motion_menu);
+	MENU_ITEM(function, MSG_HYST_CIRCLES, update_hysteresis_circles);
+	MENU_ITEM_EDIT(float52, MSG_HYST_MANUAL_X,&menu_hysteresis_X,0.00,5);
+	MENU_ITEM_EDIT(float52, MSG_HYST_MANUAL_Y,&menu_hysteresis_Y,0.00,5);
+	MENU_ITEM(function,MSG_HYST_OFF,update_hysteresis_off);
+	END_MENU();
+}
+#endif
+//-------------------------------
+
 
 #ifdef FWRETRACT
 static void lcd_control_retract_menu()
@@ -875,6 +916,7 @@ static void lcd_quick_feedback()
 {
     lcdDrawUpdate = 2;
     blocking_enc = millis() + 500;
+	//Changes Rapduch
     lcd_implementation_quick_feedback();
 }
 
@@ -1163,7 +1205,8 @@ void lcd_buttons_update()
 void lcd_buzz(long duration, uint16_t freq)
 { 
 #ifdef LCD_USE_I2C_BUZZER
-  lcd.buzz(duration,freq);
+//Changes Rapduch
+  //lcd.buzz(duration,freq);
 #endif   
 }
 
@@ -1385,5 +1428,10 @@ void copy_and_scalePID_d()
   updatePID();
 #endif
 }
+
+
+
+
+//---------------------------------
 
 #endif //ULTRA_LCD
