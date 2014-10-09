@@ -208,8 +208,8 @@ void Hysteresis::InsertCorrection(const float &x, const float &y, const float &z
 //Extra functions for LCD menu
 void update_hysteresis_circles()
 {	
-	menu_hysteresis_X=0.05;
-	menu_hysteresis_Y=0.15;
+	menu_hysteresis_X=0;
+	menu_hysteresis_Y=0.20;
 	//max_xy_jerk=1;
 }
 
