@@ -80,7 +80,7 @@
 	#define MSG_NOZZLE1 "Nozzle2"
 	#define MSG_NOZZLE2 "Nozzle3"
 	//Rapduch---
-	#define MSG_HYSTERESIS "Hystrsis"
+	#define MSG_HYSTERESIS "Hysteresis"
 	#define MSG_HYST_CIRCLES "Circles"
 	#define MSG_HYST_OFF "Disable"
 	#define MSG_HYST_MANUAL_X "Manual X"
