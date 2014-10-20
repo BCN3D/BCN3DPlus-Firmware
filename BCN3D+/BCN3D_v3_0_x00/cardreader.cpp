@@ -551,11 +551,61 @@ void CardReader::printingHasFinished()
     quickStop();
     file.close();
     sdprinting = false;
+		
+	//Rapduch from nickjamespdx https://gist.github.com/nickjamespdx/4736535 -------------
+	
+	////Tones
+	//int c = 261;
+	//int d = 294;
+	//int e = 329;
+	//int f = 349;
+	//int g = 391;
+	//int gS = 415;
+	//int a = 440;
+	//int aS = 455;
+	//int b = 466;
+	//int cH = 523;
+	//int cSH = 554;
+	//int dH = 587;
+	//int dSH = 622;
+	//int eH = 659;
+	//int fH = 698;
+	//int fSH = 740;
+	//int gH = 784;
+	//int gSH = 830;
+	//int aH = 880;
+	//
+	//tone(BEEPER,a, 500);
+	//tone(BEEPER,a, 500);
+	//tone(BEEPER,a, 500);
+	//tone(BEEPER,f, 350);
+	//tone(BEEPER,cH, 150);
+	//tone(BEEPER,a, 500);
+	//tone(BEEPER,f, 350);
+	//tone(BEEPER,cH, 150);
+	//tone(BEEPER,a, 650);
+	//
+	//noTone(BEEPER);
+	//delay(500);
+	//
+	//tone(BEEPER,eH, 500);
+	//tone(BEEPER,eH, 500);
+	//tone(BEEPER,eH, 500);
+	//tone(BEEPER,fH, 350);
+	//tone(BEEPER,cH, 150);
+	//tone(BEEPER,gS, 500);
+	//tone(BEEPER,f, 350);
+	//tone(BEEPER,cH, 150);
+	//tone(BEEPER,a, 650);
+	
+	//End SONG -----------------------------------------------
+	
     if(SD_FINISHED_STEPPERRELEASE)
     {
         //finishAndDisableSteppers();
         enquecommand_P(PSTR(SD_FINISHED_RELEASECOMMAND));
     }
+	
     autotempShutdown();
 }
 #endif //SDSUPPORT
