@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>6.2</ProjectVersion>
     <ToolchainName>com.Atmel.AVRGCC8.CPP</ToolchainName>
-    <ProjectGuid>{07b459b4-8d76-4638-bc6d-a459ba2d616b}</ProjectGuid>
+    <ProjectGuid>{8dd5f435-3eb9-4151-b2a5-58a7a3af99f8}</ProjectGuid>
     <avrdevice>atmega2560</avrdevice>
     <avrdeviceseries>none</avrdeviceseries>
     <OutputType>Executable</OutputType>
@@ -12,9 +12,9 @@
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <AssemblyName>BCN3D_v3_0_x00</AssemblyName>
-    <Name>BCN3D_v3_0_x00</Name>
-    <RootNamespace>BCN3D_v3_0_x00</RootNamespace>
+    <AssemblyName>BCN3D_v3_0_1x00</AssemblyName>
+    <Name>BCN3D_v3_0_1x00</Name>
+    <RootNamespace>BCN3D_v3_0_1x00</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
@@ -133,6 +133,11 @@
         </avrgcc.compiler.symbols.DefSymbols>
       </AvrGccCpp>
     </ToolchainSettings>
+    <VisualMicroSettings>
+      <VisualMicroSettings xmlns="">
+        <arduino.upload.port>COM10</arduino.upload.port>
+      </VisualMicroSettings>
+    </VisualMicroSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
@@ -228,9 +233,14 @@
         </avrgcc.compiler.symbols.DefSymbols>
       </AvrGccCpp>
     </ToolchainSettings>
+    <VisualMicroSettings>
+      <VisualMicroSettings xmlns="">
+        <arduino.upload.port>COM10</arduino.upload.port>
+      </VisualMicroSettings>
+    </VisualMicroSettings>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="BCN3D_v3_0_x00.ino">
+    <None Include="BCN3D_v3_0_1x00.ino">
       <SubType>compile</SubType>
     </None>
   </ItemGroup>
@@ -388,7 +398,7 @@
     <Compile Include="ultralcd_st7920_u8glib_rrd.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Visual Micro\.BCN3D_v3_0_x00.vsarduino.h">
+    <Compile Include="Visual Micro\.BCN3D_v3_0_1x00.vsarduino.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="watchdog.cpp">
