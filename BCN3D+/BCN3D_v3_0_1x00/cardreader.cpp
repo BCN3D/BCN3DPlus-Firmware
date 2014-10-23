@@ -552,8 +552,25 @@ void CardReader::printingHasFinished()
     file.close();
     sdprinting = false;
 		
-	//Rapduch from nickjamespdx https://gist.github.com/nickjamespdx/4736535 -------------
 	
+	//Rapduch
+	//tone(BEEPER, 1000); //RepRapBCN ending tone
+	//delay(500);
+	//noTone(BEEPER);
+	//delay(125);
+	//tone(BEEPER, 1000);
+	//delay(500);
+	//noTone(BEEPER);
+	//delay(125);
+	//tone(BEEPER, 1000);
+	//delay(500);
+	//noTone(BEEPER);
+	//delay(125);
+	//tone(BEEPER, 1000);	
+	//delay(1000);
+	//noTone(BEEPER);
+	
+	//Rapduch from nickjamespdx https://gist.github.com/nickjamespdx/4736535 -------------
 	////Tones
 	//int c = 261;
 	//int d = 294;
