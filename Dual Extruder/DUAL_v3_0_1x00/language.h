@@ -80,6 +80,13 @@
 	#define MSG_NOZZLE "Nozzle 1"
 	#define MSG_NOZZLE1 "Nozzle 2"
 	#define MSG_NOZZLE2 "Nozzle 3"
+	//Rapduch---
+	#define MSG_HYSTERESIS "Hysteresis"
+	#define MSG_HYST_CIRCLES "Circles"
+	#define MSG_HYST_OFF "Disable"
+	#define MSG_HYST_MANUAL_X "Manual X"
+	#define MSG_HYST_MANUAL_Y "Manual Y"
+	//----
 	#define MSG_BED "Bed"
 	#define MSG_FAN_SPEED "Fan speed"
 	#define MSG_FLOW "Flow"
