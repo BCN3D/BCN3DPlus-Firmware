@@ -6,7 +6,6 @@ In order to give our 3D Printer the intelegence needed to make awesome objects, 
 - Firmwares
     + BCN3D
     + BCN3D+
-    + BCN3D+ Dual Extruder
     
 Even thought we don't support older firmwares, you are still able to download the BCN3D version for all those firsts BCN3D out in the wild.
 
