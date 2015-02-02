@@ -386,6 +386,17 @@ void lcd_preheat_laybrick()
     setWatch(); // heater sanity check timer
 }
 
+void lcd_preheat_filaflex()
+{
+	setTargetHotend0(FILAFLEX_PREHEAT_HOTEND_TEMP);
+	setTargetHotend1(FILAFLEX_PREHEAT_HOTEND_TEMP);
+	setTargetHotend2(FILAFLEX_PREHEAT_HOTEND_TEMP);
+	setTargetBed(FILAFLEX_PREHEAT_HPB_TEMP);
+	fanSpeed = FILAFLEX_PREHEAT_FAN_SPEED;
+	lcd_return_to_status();
+	setWatch(); // heater sanity check timer
+}
+
 static void lcd_cooldown()
 {
     setTargetHotend0(0);
@@ -484,6 +495,7 @@ static void lcd_preheat_menu()
     MENU_ITEM(function, MSG_PREHEAT_PVA, lcd_preheat_pva);
     MENU_ITEM(function, MSG_PREHEAT_LAYWOOD, lcd_preheat_laywood);
     MENU_ITEM(function, MSG_PREHEAT_LAYBRICK, lcd_preheat_laybrick);
+	MENU_ITEM(function, MSG_PREHEAT_FILAFLEX, lcd_preheat_filaflex);
     END_MENU();
 }
 

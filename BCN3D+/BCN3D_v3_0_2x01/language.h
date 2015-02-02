@@ -67,6 +67,7 @@
         #define MSG_PREHEAT_LAYWOOD_SETTINGS "Preheat LayWood Conf"
         #define MSG_PREHEAT_LAYBRICK "Preheat LayBrick"
         #define MSG_PREHEAT_LAYBRICK_SETTINGS "Preheat LayBrick Conf"
+		#define MSG_PREHEAT_FILAFLEX "Preheat FilaFlex"
 	#define MSG_COOLDOWN "Cooldown"
         #define MSG_PREHEAT "Preheat"
         #define MSG_CHANGE "Change Filament"
