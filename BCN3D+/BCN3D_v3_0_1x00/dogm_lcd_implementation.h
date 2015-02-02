@@ -122,7 +122,7 @@ static void lcd_implementation_init()
                       	
 						  //Rapduch						  
 						  u8g.setPrintPos(83,51);
-						  u8g.print("v3.0");
+						  u8g.print("v3.0.1");
 						  
 						  /*
                         u8g.drawStr(62,10,"MARLIN"); 
@@ -743,6 +743,7 @@ static void lcd_implementation_quick_feedback()
     SET_OUTPUT(BEEPER);
     for(int8_t i=0;i<10;i++)
     {
+    	//Rapduch
 		tone(BEEPER, 1200, 50);		
 		//WRITE(BEEPER,HIGH);
 		//delay(3);

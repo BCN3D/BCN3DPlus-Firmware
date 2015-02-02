@@ -130,6 +130,9 @@ static int maxttemp[EXTRUDERS] = ARRAY_BY_EXTRUDERS( 16383, 16383, 16383 );
 #ifdef BED_MAXTEMP
 static int bed_maxttemp_raw = HEATER_BED_RAW_HI_TEMP;
 #endif
+#ifdef BED_MINTEMP
+static int bed_minttemp_raw = HEATER_BED_RAW_LO_TEMP;
+#endif
 
 #ifdef TEMP_SENSOR_1_AS_REDUNDANT
   static void *heater_ttbl_map[2] = {(void *)HEATER_0_TEMPTABLE, (void *)HEATER_1_TEMPTABLE };
@@ -854,7 +857,8 @@ void tp_init()
 #endif //MAXTEMP 2
 
 #ifdef BED_MINTEMP
-  /* No bed MINTEMP error implemented?!? */ /*
+	// Jcalduch
+  // No bed MINTEMP error implemented?!? 
   while(analog2tempBed(bed_minttemp_raw) < BED_MINTEMP) {
 #if HEATER_BED_RAW_LO_TEMP < HEATER_BED_RAW_HI_TEMP
     bed_minttemp_raw += OVERSAMPLENR;
@@ -862,7 +866,7 @@ void tp_init()
     bed_minttemp_raw -= OVERSAMPLENR;
 #endif
   }
-  */
+  
 #endif //BED_MINTEMP
 #ifdef BED_MAXTEMP
   while(analog2tempBed(bed_maxttemp_raw) > BED_MAXTEMP) {
@@ -934,7 +938,7 @@ void max_temp_error(uint8_t e) {
     SERIAL_ERROR_START;
     SERIAL_ERRORLN((int)e);
     SERIAL_ERRORLNPGM(": Extruder switched off. MAXTEMP triggered !");
-    LCD_ALERTMESSAGEPGM("Err: MAXTEMP");
+    LCD_ALERTMESSAGEPGM("Err: ExtruderMAXTEMP");
   }
   #ifndef BOGUS_TEMPERATURE_FAILSAFE_OVERRIDE
   Stop();
@@ -947,7 +951,7 @@ void min_temp_error(uint8_t e) {
     SERIAL_ERROR_START;
     SERIAL_ERRORLN((int)e);
     SERIAL_ERRORLNPGM(": Extruder switched off. MINTEMP triggered !");
-    LCD_ALERTMESSAGEPGM("Err: MINTEMP");
+    LCD_ALERTMESSAGEPGM("Err: ExtruderMINTEMP");
   }
   #ifndef BOGUS_TEMPERATURE_FAILSAFE_OVERRIDE
   Stop();
@@ -967,6 +971,23 @@ void bed_max_temp_error(void) {
   Stop();
   #endif
 }
+
+
+void bed_min_temp_error(void) {
+	#if HEATER_BED_PIN > -1
+	WRITE(HEATER_BED_PIN, 0);
+	#endif
+	if(IsStopped() == false) {
+		SERIAL_ERROR_START;
+		SERIAL_ERRORLNPGM("Temperature heated bed switched off. MINTEMP triggered !!");
+		LCD_ALERTMESSAGEPGM("Err: MINTEMP BED");
+	}
+	#ifndef BOGUS_TEMPERATURE_FAILSAFE_OVERRIDE
+	Stop();
+	#endif
+}
+
+
 
 #ifdef HEATER_0_USES_MAX6675
 #define MAX6675_HEAT_INTERVAL 250
@@ -1253,8 +1274,20 @@ ISR(TIMER0_COMPB_vect)
        bed_max_temp_error();
     }
 #endif
-  }  
+
+#if defined(BED_MINTEMP) && (TEMP_SENSOR_BED != 0)
+# if HEATER_BED_RAW_LO_TEMP > HEATER_BED_RAW_HI_TEMP
+	if(current_temperature_bed_raw >= bed_minttemp_raw) {
+#else
+	if(current_temperature_bed_raw <= bed_minttemp_raw) {
+#endif
+		target_temperature_bed = 0;
+		bed_min_temp_error();
+	}
+#endif
+  }
 }
+
 
 #ifdef PIDTEMP
 // Apply the scale factors to the PID values

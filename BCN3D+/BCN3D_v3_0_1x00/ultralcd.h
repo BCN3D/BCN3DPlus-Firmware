@@ -86,7 +86,6 @@ char *ftostr52(const float &x);
 //Rapduch
 extern void update_hysteresis_circles ();
 extern void update_hysteresis_off();
-//
 //static void lcd_hysteresis_menu();
 
 
