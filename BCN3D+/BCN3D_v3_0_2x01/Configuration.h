@@ -410,8 +410,8 @@ const bool Z_ENDSTOPS_INVERTING = true; // set to true to invert the logic of th
 #define LAYBRICK_PREHEAT_HPB_TEMP 40
 #define LAYBRICK_PREHEAT_FAN_SPEED 0   // Insert Value between 0 and 255
 
-#define FILAFLEX_PREHEAT_HOTEND_TEMP 240
-#define FILAFLEX_PREHEAT_HPB_TEMP 30
+#define FILAFLEX_PREHEAT_HOTEND_TEMP 235
+#define FILAFLEX_PREHEAT_HPB_TEMP 0
 #define FILAFLEX_PREHEAT_FAN_SPEED 0   // Insert Value between 0 and 255
 
 
